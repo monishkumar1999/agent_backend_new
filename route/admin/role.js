@@ -5,15 +5,7 @@ const cors = require('cors');
 
 const roleMaster = express.Router();
 
-const corsOptions = {
-    origin: 'http://localhost:3000',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Encrypted-Data'],
-    credentials: true,
-};
 
-roleMaster.use(cors(corsOptions));
-roleMaster.options('*', cors(corsOptions));
 
 // API to add a new Role
 roleMaster.use("/add", checkJwt, async (req, res) => {

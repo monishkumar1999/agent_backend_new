@@ -6,15 +6,7 @@ const PropertyModel = require('../../model/propertyModel');
 
 const propertyRoute = express.Router();
 
-const corsOptions = {
-    origin: 'http://localhost:3000',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Encrypted-Data'],
-    credentials: true,
-};
 
-propertyRoute.use(cors(corsOptions));
-propertyRoute.options('*', cors(corsOptions));
 
 // API to add a new Role
 propertyRoute.use("/add", checkJwt, async (req, res) => {

@@ -5,15 +5,7 @@ const cors = require('cors');
 
 const describeRouter = express.Router();
 
-const corsOptions = {
-    origin: 'http://localhost:3000',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Encrypted-Data'],
-    credentials: true,
-};
 
-describeRouter.use(cors(corsOptions));
-describeRouter.options('*', cors(corsOptions));
 
 // API to add a new DescribesAgency
 describeRouter.use("/add", checkJwt, async (req, res) => {

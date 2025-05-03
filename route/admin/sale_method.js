@@ -6,15 +6,6 @@ const Sale_method = require('../../model/sale_method copy');
 
 const saleMethod = express.Router();
 
-const corsOptions = {
-    origin: 'http://localhost:3000',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Encrypted-Data'],
-    credentials: true,
-};
-
-saleMethod.use(cors(corsOptions));
-saleMethod.options('*', cors(corsOptions));
 
 // API to add a new Role
 saleMethod.use("/add", checkJwt, async (req, res) => {

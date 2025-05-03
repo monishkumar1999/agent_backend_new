@@ -37,19 +37,40 @@ const app = express();
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
-const corsOptions = {
-    origin:[ "http://localhost:3000",'http://192.168.29.5:3000'],
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization", "X-Encrypted-Data"],
-    credentials: true,
-    exposedHeaders: ["Cross-Origin-Opener-Policy"], // Expose COOP
-};
-
-app.use(cors(corsOptions));
 
 
-
-
+// Configure CORS with dynamic origin handling
+// Configure CORS with dynamic origin handling
+const allowedOrigins = [
+    "http://localhost:3000", // Development
+    "http://13.203.235.203", // Your React app's origin
+    "http://13.203.235.203:3000", // Replace with your React app's domain in production
+  ];
+  
+  const corsOptions = {
+    origin: (origin, callback) => {
+      console.log("Request Origin:", origin);
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        console.error("CORS Error: Origin not allowed:", origin);
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: "GET,POST,PUT,DELETE,OPTIONS",
+    allowedHeaders: "Content-Type,Authorization",
+    optionsSuccessStatus: 200,
+    credentials: true, // If your app uses cookies or authentication
+  };
+  
+  // Apply CORS middleware
+  app.use(cors(corsOptions));
+  
+  // Explicitly handle preflight OPTIONS requests
+  app.options("*", cors(corsOptions), (req, res) => {
+    console.log("Handling OPTIONS request for:", req.url);
+    res.status(200).end();
+  });
 
 
 const server = http.createServer(app);

@@ -7,15 +7,6 @@ const Durationagreement = require('../../model/durationModel');
 
 const durationRoute = express.Router();
 
-const corsOptions = {
-    origin: 'http://localhost:3000',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Encrypted-Data'],
-    credentials: true,
-};
-
-durationRoute.use(cors(corsOptions));
-durationRoute.options('*', cors(corsOptions));
 
 // API to add a new Role
 durationRoute.use("/add", checkJwt, async (req, res) => {

@@ -6,16 +6,6 @@ const DigitalSolutionModel = require('../../model/digitalSolution');
 
 const digitalRoute = express.Router();
 
-const corsOptions = {
-    origin: 'http://localhost:3000',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Encrypted-Data'],
-    credentials: true,
-};
-
-digitalRoute.use(cors(corsOptions));
-digitalRoute.options('*', cors(corsOptions));
-
 // API to add a new Role
 digitalRoute.use("/add", checkJwt, async (req, res) => {
     const { name } = req.body;

@@ -6,15 +6,7 @@ const PurchasePurpose = require('../../model/purchasePurposeModel');
 
 const purchasePurpose = express.Router();
 
-const corsOptions = {
-    origin: 'http://localhost:3000',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Encrypted-Data'],
-    credentials: true,
-};
 
-purchasePurpose.use(cors(corsOptions));
-purchasePurpose.options('*', cors(corsOptions));
 
 // API to add a new Role
 purchasePurpose.use("/add", checkJwt, async (req, res) => {

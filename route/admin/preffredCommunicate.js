@@ -7,16 +7,6 @@ const preffredCommunicate = require('../../model/commuicate_prefeffedModel');
 
 const prefferedCommunicateRoute = express.Router();
 
-const corsOptions = {
-    origin: 'http://localhost:3000',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Encrypted-Data'],
-    credentials: true,
-};
-
-prefferedCommunicateRoute.use(cors(corsOptions));
-prefferedCommunicateRoute.options('*', cors(corsOptions));
-
 // API to add a new Role
 prefferedCommunicateRoute.use("/add", checkJwt, async (req, res) => {
     const { name } = req.body;
