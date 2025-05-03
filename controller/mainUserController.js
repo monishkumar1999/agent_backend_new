@@ -252,4 +252,20 @@ const getAgentsByProposal = async (req, res) => {
     }
   };
 
-module.exports = { login, register, verifyOtp, getAgentsByProposal }
+  const getAgentDetailsById = async (req, res) => {
+    try {
+      const { agentId } = req.params;
+      const agent = await AgentModel.findById(agentId);
+  
+      if (!agent) {
+        return res.status(404).json({ success: false, message: 'Agent not found' });
+      }
+  
+      res.status(200).json({ success: true, data: agent });
+    } catch (error) {
+      console.error("Get Agent Details By ID Error:", error);
+      res.status(500).json({ success: false, message: 'Server error' });
+    }
+  };
+  
+module.exports = { login, register, verifyOtp, getAgentsByProposal,getAgentDetailsById}
